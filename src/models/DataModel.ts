@@ -22,6 +22,8 @@ interface IMusicRecordLocaleJson {
     artist?: string;
     title?: string;
   };
+  songType: string;
+  pack: string;
 }
 
 interface IMusicRecordDecorationJson {
@@ -42,6 +44,8 @@ export interface IMusicRecordJson {
   metadata: IMusicRecordMetadataJson;
   source: IMusicRecordSourceJson;
   youtube: string;
+  songType: string;
+  pack: string;
 }
 
 export interface IMusicRecordSourceGrid
