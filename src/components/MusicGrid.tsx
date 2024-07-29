@@ -118,7 +118,7 @@ const getColDef: (
       }),
     },
     {
-      headerName: 'Description',
+      headerName: 'Artist',
       minWidth: 375,
       field: 'description',
       valueGetter: (params: ValueGetterParams) => {
@@ -133,7 +133,7 @@ const getColDef: (
       },
     },
     {
-      headerName: 'Folder',
+      headerName: 'Station',
       field: 'source.structure',
       getQuickFilterText: (): string => '',
     },
@@ -150,10 +150,49 @@ const getColDef: (
       getQuickFilterText: (): string => '',
     },
     {
-      headerName: 'Client',
+      headerName: 'Game',
       field: 'source.clientVersion',
       getQuickFilterText: (): string => '',
       cellStyle: ClientVersionCellStyle,
+    },
+    {
+      headerName: 'Pack',
+      field: 'pack',
+      minWidth: 150,
+      valueGetter: (params: ValueGetterParams) => {
+        const { i18n } = params.context as IGridContext;
+        const data = params.data as IMusicRecordGrid;
+        const lang = getJsonLocale(i18n.language);
+        if (lang === 'en') {
+          return data.pack;
+        } else {
+          return data.locale?.[lang]?.pack ?? data.pack;
+        }
+      },
+      getQuickFilterText: (): string => '',
+    },
+    {
+      headerName: 'Song Type',
+      minWidth: 100,
+      field: 'songType',
+      valueGetter: (params: ValueGetterParams) => {
+        const { i18n } = params.context as IGridContext;
+        const data = params.data as IMusicRecordGrid;
+        const lang = getJsonLocale(i18n.language);
+        if (lang === 'en') {
+          return data.songType;
+        } else {
+          return data.locale?.[lang]?.songType ?? data.metadata.title;
+        }
+      },
+      cellRendererFramework: LinkRenderer,
+      cellRendererParams: (
+        props: ICellRendererParams
+      ): ILinkRendererParams => ({
+        title: props.value,
+        youtube: props.data.originalSong,
+        onGridSongChange: onGridSongChange,
+      }),
     },
   ];
 };
