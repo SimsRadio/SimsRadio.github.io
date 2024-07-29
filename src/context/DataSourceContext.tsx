@@ -9,7 +9,6 @@ import { useSettings } from './SettingsContext';
 import { useSetAtom } from 'jotai';
 import { IPlaylist } from '../models/Playlist';
 import { playlistMapAtom } from '../state/playlist';
-import { KMST_GENERATION_CUTOFF_DATE } from '../constants';
 import { convertToPlaylistMap } from '../components/utils/PlaylistUtils';
 
 type State = IMusicRecordGrid[];
@@ -18,21 +17,6 @@ type DataSourceProviderProps = { children: React.ReactNode };
 const DataSourceStateContext = React.createContext<State | undefined>(
   undefined
 );
-
-const buildClientVersion = (
-  client: string,
-  version: string,
-  date: Date | null,
-  distinctKmstVersion: boolean
-) => {
-  if (distinctKmstVersion && client === 'KMST' && date !== null) {
-    if (date >= KMST_GENERATION_CUTOFF_DATE) {
-      const [major, minor, patch] = version.split('.');
-      return `${client} ${major}.${minor}.1${patch}`;
-    }
-  }
-  return `${client} ${version}`;
-};
 
 export const DataSourceProvider: ({
   children,
@@ -43,7 +27,7 @@ export const DataSourceProvider: ({
 
   useEffect(() => {
     fetch(
-      'https://raw.githubusercontent.com/maplestory-music/maplebgm-db/prod/bgm.min.json'
+      'https://raw.githubusercontent.com/dyzancorn/SimsRadioData/main/simsRadioData.json'
     )
       .then((result) => result.json())
       .then((rowData: IMusicRecordJson[]) => {
@@ -60,15 +44,7 @@ export const DataSourceProvider: ({
               date,
               structure: song.source.structure,
               version: song.source.version,
-              clientVersion:
-                song.source.client && song.source.version
-                  ? buildClientVersion(
-                      song.source.client,
-                      song.source.version,
-                      date,
-                      settings.distinctKmstVersion
-                    )
-                  : '',
+              clientVersion: song.source.client,
             };
             const gridRecord: IMusicRecordGrid = Object.assign({}, song, {
               source: source,
