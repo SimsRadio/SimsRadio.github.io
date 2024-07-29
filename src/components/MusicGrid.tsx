@@ -182,7 +182,7 @@ const getColDef: (
         if (lang === 'en') {
           return data.songType;
         } else {
-          return data.locale?.[lang]?.songType ?? data.metadata.title;
+          return data.locale?.[lang]?.songType ?? data.songType;
         }
       },
       cellRendererFramework: LinkRenderer,
