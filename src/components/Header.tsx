@@ -18,17 +18,20 @@ export const Header: React.FC<IHeader> = ({ noText }) => {
             margin-bottom: 10px;
           `}
           id="header-logo"
-          src="assets/pink-bean.png"
+          src="assets/dj-candy.png"
           alt="header logo"
         />
       </div>
       {noText ? null : (
         <div>
-          <p>
-            Welcome to the MapleStory Music database. This site provides a
-            complete listing of the background music (BGM) used in MapleStory.
-            Collectively, the songs are also known as MapleStory's original
-            soundtrack (OST).
+          <p
+            css={css`
+              text-align: center;
+            `}
+          >
+            Welcome to the SimsRadio database. This site provides a listing of
+            the radio music used in games of the "The Sims" series, compiled by
+            SpiderInTheSim.
           </p>
         </div>
       )}

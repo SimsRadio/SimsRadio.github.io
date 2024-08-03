@@ -63,12 +63,12 @@ const Header: React.FC = () => {
               margin-right: 8px;
             `}
             alt=""
-            src="./assets/pb-logo.svg"
+            src="./assets/dj-logo.webp"
             width="30"
             height="30"
             className="d-inline-block align-top"
           />{' '}
-          MapleStory Music
+          SimsRadio
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
