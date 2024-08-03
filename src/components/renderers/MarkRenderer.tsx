@@ -13,7 +13,7 @@ export const MarkRenderer: React.FC<ICellRendererParams> = (params) => {
           <Tooltip id={`tooltip-pack-name`}>
             {params.data.pack
               ? params.data.pack
-              : params.data.source.clientVersion}
+              : params.data.source?.clientVersion}
           </Tooltip>
         }
       >
