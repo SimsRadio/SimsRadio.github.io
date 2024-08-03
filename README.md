@@ -7,7 +7,7 @@ SimsRadio website
 
 ## Description
 
-This project houses the source for the [SimsRadio](https://SimsRadio.github.io/) website. This project was built upon on the foundation of the [MapleStory Music](https://maplestory-music.github.io/) project, and we thank them for their amazing work and idea that we could take on as the base for ours.
+This project houses the source for the [SimsRadio](https://SimsRadio.github.io/) website. This project was built on the foundation of the [MapleStory Music](https://maplestory-music.github.io/) project, and we thank them for their amazing work and ideas that we could take on as the base for ours.
 
 ## Available Scripts
 
