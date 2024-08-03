@@ -206,7 +206,7 @@ const Footer = (): ReactElement => {
   );
 };
 
-const siteTitle = 'MapleStory Music - BGM & OST Database';
+const siteTitle = 'SimsRadio';
 const pageTitles: { [name: string]: string } = {
   '/': siteTitle,
   '/playlist': `${siteTitle} - Playlist`,
