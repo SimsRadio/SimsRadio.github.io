@@ -97,7 +97,7 @@ const getColDef: (
     {
       headerName: 'Title',
       field: 'metadata.title',
-      minWidth: 250,
+      minWidth: 200,
       valueGetter: (params: ValueGetterParams) => {
         const { i18n } = params.context as IGridContext;
         const data = params.data as IMusicRecordGrid;
@@ -119,7 +119,7 @@ const getColDef: (
     },
     {
       headerName: 'Artist',
-      minWidth: 375,
+      minWidth: 200,
       field: 'description',
       valueGetter: (params: ValueGetterParams) => {
         const { i18n } = params.context as IGridContext;
@@ -135,6 +135,7 @@ const getColDef: (
     {
       headerName: 'Station',
       field: 'source.structure',
+      minWidth: 150,
       getQuickFilterText: (): string => '',
     },
     {
@@ -158,7 +159,7 @@ const getColDef: (
     {
       headerName: 'Pack',
       field: 'pack',
-      minWidth: 150,
+      minWidth: 175,
       valueGetter: (params: ValueGetterParams) => {
         const { i18n } = params.context as IGridContext;
         const data = params.data as IMusicRecordGrid;
