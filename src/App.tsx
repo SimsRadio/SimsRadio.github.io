@@ -84,9 +84,9 @@ const Header: React.FC = () => {
             >
               Playlist
             </Nav.Link>
-            <Nav.Link as={NavLink} exact to="/stats" onClick={onNavLinkClick}>
+            {/* <Nav.Link as={NavLink} exact to="/stats" onClick={onNavLinkClick}>
               Stats
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link as={NavLink} exact to="/about" onClick={onNavLinkClick}>
               About
             </Nav.Link>
@@ -138,7 +138,7 @@ const Header: React.FC = () => {
                 Dark
               </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title={<i className="fa fa-earth-americas" />}>
+            {/* <NavDropdown title={<i className="fa fa-earth-americas" />}>
               <NavDropdown.Item
                 active={i18n.language?.startsWith('en')}
                 onClick={() => i18n.changeLanguage('en')}
@@ -169,7 +169,7 @@ const Header: React.FC = () => {
               >
                 Chinese (Traditional)
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
             <Nav.Link
               as={NavLink}
               to="#"
@@ -210,7 +210,7 @@ const siteTitle = 'SimsRadio';
 const pageTitles: { [name: string]: string } = {
   '/': siteTitle,
   '/playlist': `${siteTitle} - Playlist`,
-  '/stats': `${siteTitle} - Stats`,
+  // '/stats': `${siteTitle} - Stats`,
   '/about': `${siteTitle} - About`,
   '/playlist-builder': `${siteTitle} - Playlist Builder`,
 };
@@ -225,7 +225,7 @@ const Main = (): ReactElement => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/playlist" component={Playlist} />
-        <Route path="/stats" component={Stats} />
+        {/* <Route path="/stats" component={Stats} /> */}
         <Route path="/about" component={About} />
         <Route path="/playlist-builder" component={PlaylistBuilder} />
       </Switch>
