@@ -46,7 +46,8 @@ export const SettingsModal: React.FC<ISettingsModalProps> = ({
         <Modal.Title>Settings</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        TBD
+        {/* <Form>
           <>
             <div
               css={css`
@@ -83,12 +84,12 @@ export const SettingsModal: React.FC<ISettingsModalProps> = ({
               />
             </div>
           </>
-        </Form>
+        </Form> */}
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={onModalSave}>
+        {/* <Button variant="primary" onClick={onModalSave}>
           Save
-        </Button>
+        </Button> */}
       </Modal.Footer>
     </Modal>
   );
