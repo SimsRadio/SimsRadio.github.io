@@ -1,13 +1,13 @@
-[![Build Status](https://github.com/maplestory-music/maplestory-music.github.io/actions/workflows/build.yml/badge.svg)](https://github.com/maplestory-music/maplestory-music.github.io/actions/workflows/build.yml)
+[![Build Status](https://github.com/SimsRadio/SimsRadio.github.io/actions/workflows/build.yml/badge.svg)](https://github.com/SimsRadio/SimsRadio.github.io/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-# maplestory-music
+# SimsRadio
 
-MapleStory Music website
+SimsRadio website
 
 ## Description
 
-This project houses the source for the [MapleStory Music](https://maplestory-music.github.io/) website.
+This project houses the source for the [SimsRadio](https://SimsRadio.github.io/) website. This project was built upon on the foundation of the [MapleStory Music](https://maplestory-music.github.io/) project, and we thank them for their amazing work and idea that we could take on as the base for ours.
 
 ## Available Scripts
 
