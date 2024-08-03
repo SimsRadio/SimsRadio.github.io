@@ -27,7 +27,7 @@ export const DataSourceProvider: ({
 
   useEffect(() => {
     fetch(
-      'https://raw.githubusercontent.com/dyzancorn/SimsRadioData/main/simsRadioData.json'
+      'https://raw.githubusercontent.com/dyzancorn/SimsRadioDataTest/prod/simsRadioData.json'
     )
       .then((result) => result.json())
       .then((rowData: IMusicRecordJson[]) => {
