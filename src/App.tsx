@@ -13,11 +13,11 @@ import { createBrowserHistory } from 'history';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
-import StatsPage from './pages/StatsPage';
+// import StatsPage from './pages/StatsPage';
 import { DataSourceProvider } from './context/DataSourceContext';
 import React, { ReactElement, useEffect, useState } from 'react';
 import { formatISO } from 'date-fns';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { SettingsModal } from './components/SettingsModal';
 import { SettingsProvider } from './context/SettingsContext';
@@ -37,7 +37,7 @@ const onNavLinkClick: (e: React.MouseEvent<HTMLAnchorElement>) => void = (
 };
 
 const Header: React.FC = () => {
-  const { i18n } = useTranslation();
+  // const { i18n } = useTranslation();
   const appTheme = useTheme();
   const [settingsModalVisible, setSettingModalVisible] = useState(false);
   return (
@@ -256,16 +256,16 @@ const About = (): ReactElement => (
   </div>
 );
 
-const Stats = (): ReactElement => (
-  <div
-    css={css`
-      margin: 2% 3% 1% 3%;
-    `}
-    className="Stats"
-  >
-    <StatsPage />
-  </div>
-);
+// const Stats = (): ReactElement => (
+//   <div
+//     css={css`
+//       margin: 2% 3% 1% 3%;
+//     `}
+//     className="Stats"
+//   >
+//     <StatsPage />
+//   </div>
+// );
 
 const PlaylistBuilder = (): ReactElement => (
   <div

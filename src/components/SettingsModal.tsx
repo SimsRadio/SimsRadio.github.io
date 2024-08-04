@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
-import { useSettings } from '../context/SettingsContext';
-import { SettingsModalToggle } from './SettingsModalToggle';
+// import { css } from '@emotion/react';
+// import { useState } from 'react';
+// import { Button, Form, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
+// import { useSettings } from '../context/SettingsContext';
+// import { SettingsModalToggle } from './SettingsModalToggle';
 
 interface ISettingsModalProps {
   show: boolean;
@@ -14,30 +15,30 @@ export const SettingsModal: React.FC<ISettingsModalProps> = ({
   show,
   onModalClose,
 }) => {
-  const { settings, setSettings } = useSettings();
-  const [hideMinorTracks, setHideMinorTracks] = useState(
-    settings.hideMinorTracks
-  );
-  const [distinctKmstVersion, setDistinctKmstVersion] = useState(
-    settings.distinctKmstVersion
-  );
-  const [jsonOptimizedTrackIdCopy, setJsonOptimizedTrackIdCopy] = useState(
-    settings.jsonOptimizedTrackIdCopy
-  );
+  // const { settings, setSettings } = useSettings();
+  // const [hideMinorTracks, setHideMinorTracks] = useState(
+  //   settings.hideMinorTracks
+  // );
+  // const [distinctKmstVersion, setDistinctKmstVersion] = useState(
+  //   settings.distinctKmstVersion
+  // );
+  // const [jsonOptimizedTrackIdCopy, setJsonOptimizedTrackIdCopy] = useState(
+  //   settings.jsonOptimizedTrackIdCopy
+  // );
 
-  const onModalSave = () => {
-    setSettings({
-      hideMinorTracks,
-      distinctKmstVersion,
-      jsonOptimizedTrackIdCopy,
-    });
-    onModalClose();
-  };
+  // const onModalSave = () => {
+  //   setSettings({
+  //     hideMinorTracks,
+  //     distinctKmstVersion,
+  //     jsonOptimizedTrackIdCopy,
+  //   });
+  //   onModalClose();
+  // };
 
   const onModalShow = () => {
-    setHideMinorTracks(settings.hideMinorTracks);
-    setDistinctKmstVersion(settings.distinctKmstVersion);
-    setJsonOptimizedTrackIdCopy(settings.jsonOptimizedTrackIdCopy);
+    // setHideMinorTracks(settings.hideMinorTracks);
+    // setDistinctKmstVersion(settings.distinctKmstVersion);
+    // setJsonOptimizedTrackIdCopy(settings.jsonOptimizedTrackIdCopy);
   };
 
   return (
