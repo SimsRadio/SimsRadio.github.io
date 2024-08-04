@@ -54,7 +54,7 @@ export const DataSourceProvider: ({
         setState(rowDataGrid);
       });
     fetch(
-      'https://raw.githubusercontent.com/maplestory-music/maplebgm-db/prod/playlist.min.json'
+      'https://raw.githubusercontent.com/dyzancorn/SimsRadioDataTest/prod/playlist.min.json'
     )
       .then((result) => result.json())
       .then((playlist: IPlaylist[]) => {
