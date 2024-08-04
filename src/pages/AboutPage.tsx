@@ -14,9 +14,8 @@ const AboutPage: React.FC = () => (
     >
       <h2>About</h2>
       <p>
-        This database catalogs music from every region of MapleStory and aims to
-        be the definitive resource for MapleStory music. It will be updated
-        whenever new songs are added to the client of any region.
+        This database catalogs radio music from various games in the "The Sims"
+        series. It has been compiled and is being updated by SpiderInTheSim.
       </p>
       <h6>
         <b>Music Playback</b>
@@ -45,41 +44,33 @@ const AboutPage: React.FC = () => (
         header.
       </p>
       <h6>
-        <b>Language</b>
+        <b>Acknowledgments</b>
       </h6>
       <p>
-        Language support is a work in progress. Changing the language will
-        translate metadata displayed for the songs in the grid. If there are no
-        translations for an entry, English will be used as the default language.
+        We thank the creators of the{' '}
+        <a
+          href="https://github.com/maplestory-music/maplestory-music.github.io"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Maplestory Music
+        </a>{' '}
+        database project for their amazing work and ideas, of which we have used
+        as the foundation of the SimsRadio website project.
       </p>
     </div>
     <h2>Source</h2>
     <p>The following GitHub projects power this site.</p>
     <div className="gh-project-entry">
+      <h5 className="gh-project-name">SimsRadio: Sims Radio music website</h5>
       <GitHubButton
-        href="https://github.com/maplestory-music/maplebgm-db"
+        href="https://github.com/simsradio/simsradio.github.io"
         data-size="large"
         data-show-count={true}
-        aria-label="Star maplestory-music/maplebgm-db on GitHub"
+        aria-label="Star simsradio.simsradio.github.io on GitHub"
       >
         Star
       </GitHubButton>
-      <h5 className="gh-project-name">
-        maplebgm-db: Definitive MapleStory music database
-      </h5>
-    </div>
-    <div className="gh-project-entry">
-      <GitHubButton
-        href="https://github.com/maplestory-music/maplestory-music.github.io"
-        data-size="large"
-        data-show-count={true}
-        aria-label="Star maplestory-music/maplestory-music.github.io on GitHub"
-      >
-        Star
-      </GitHubButton>
-      <h5 className="gh-project-name">
-        maplestory-music: MapleStory Music website
-      </h5>
     </div>
   </div>
 );
