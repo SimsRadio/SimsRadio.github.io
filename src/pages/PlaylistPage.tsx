@@ -81,11 +81,15 @@ const PlaylistPage: React.FC = () => {
     }
     const allPlaylistTracksArr = Array.from(allPlaylistTracks);
     const filtered = dbFromWire.filter((track) => {
-      const key = getKey(track.source.structure, track.filename);
+      const key = getKey(
+        track.source.client,
+        track.source.structure,
+        track.filename
+      );
       return allPlaylistTracks.has(key);
     });
     const sorted = sortBy(filtered, (t) => {
-      const key = getKey(t.source.structure, t.filename);
+      const key = getKey(t.source.client, t.source.structure, t.filename);
       return allPlaylistTracksArr.indexOf(key);
     });
     setDataSource(sorted);

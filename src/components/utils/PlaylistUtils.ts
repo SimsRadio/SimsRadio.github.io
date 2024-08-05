@@ -2,8 +2,12 @@ import { IPlaylist } from '../../models/Playlist';
 
 const LOCAL_STORAGE_KEY = 'custom-playlists';
 
-export const getKey = (folder: string, filename: string): string => {
-  return `${folder}/${filename}`;
+export const getKey = (
+  game: string,
+  folder: string,
+  filename: string
+): string => {
+  return `${game}/${folder}/${filename}`;
 };
 
 export function resetCustomPlaylists(): void {

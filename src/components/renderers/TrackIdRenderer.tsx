@@ -11,10 +11,10 @@ import { useSettings } from '../../context/SettingsContext';
 export const TrackIdRenderer: React.FC<ICellRendererParams> = (params) => {
   const { settings } = useSettings();
   const { data } = params;
-  const key = useMemo(() => getKey(data.source.structure, data.filename), [
-    data.source.structure,
-    data.filename,
-  ]);
+  const key = useMemo(
+    () => getKey(data.source.client, data.source.structure, data.filename),
+    [data.source.client, data.source.structure, data.filename]
+  );
   const [trackExportSet, setTrackExportSet] = useAtom(trackExportSetAtom);
   const trackInExportSet = useMemo(() => trackExportSet.has(key), [
     key,
