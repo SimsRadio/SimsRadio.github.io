@@ -8,6 +8,7 @@ import {
   Link,
   NavLink,
   useLocation,
+  Redirect,
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
@@ -228,6 +229,7 @@ const Main = (): ReactElement => {
         {/* <Route path="/stats" component={Stats} /> */}
         <Route path="/about" component={About} />
         <Route path="/playlist-builder" component={PlaylistBuilder} />
+        <Redirect from="*" to="/" />
       </Switch>
     </main>
   );
