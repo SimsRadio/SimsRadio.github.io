@@ -11,9 +11,12 @@ export const MarkRenderer: React.FC<ICellRendererParams> = (params) => {
         delay={{ show: 250, hide: 100 }}
         overlay={
           <Tooltip id={`tooltip-pack-name`}>
-            {params.data.pack
+            {(params.data.pack
               ? params.data.pack
-              : params.data.source?.clientVersion}
+              : params.data.source?.clientVersion) +
+              (imgSrc === 'mark/default.png'
+                ? ' (This is a placeholder image)'
+                : '')}
           </Tooltip>
         }
       >
