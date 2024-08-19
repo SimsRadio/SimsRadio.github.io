@@ -51,7 +51,7 @@ const PlaylistBuilderPage: React.FC = () => {
       return outputFile;
     };
     const link = document.createElement('a');
-    link.setAttribute('download', 'maplestory-custom-playlists.json');
+    link.setAttribute('download', 'simsradio-custom-playlists.json');
     link.href = exportCustomPlaylists();
     link.click();
   };
