@@ -24,6 +24,7 @@ import { format } from 'date-fns';
 import { IMusicRecordGrid } from '../models/DataModel';
 import { PAGINATION_PAGE_SIZE } from '../constants';
 import { MarkRenderer } from './renderers/MarkRenderer';
+import { CheckRenderer } from './renderers/CheckRenderer';
 import { ILinkRendererParams, LinkRenderer } from './renderers/LinkRenderer';
 import { DateRenderer } from './renderers/DateRenderer';
 import { useTranslation } from 'react-i18next';
@@ -32,6 +33,7 @@ import { LanguageLocale } from '../i18n';
 import { useTheme } from '../context/ThemeContext';
 import { ClientVersionCellStyle } from './utils/GridUtils';
 import { useAtomValue, useSetAtom } from 'jotai';
+import { useSettings, ISettings } from '../context/SettingsContext';
 import {
   appQueuePoolAtom,
   filterTextAtom,
@@ -76,9 +78,28 @@ const getGridOptions: () => GridOptions = () => {
 
 const getColDef: (
   onGridSongChange: (song: string) => void,
-  enableTrackIdCol?: boolean
-) => ColDef[] = (onGridSongChange, enableTrackIdCol) => {
-  return [
+  enableTrackIdCol?: boolean,
+  settings?: ISettings
+) => ColDef[] = (onGridSongChange, enableTrackIdCol, settings) => {
+  const optionalCols = [] as ColDef[];
+  if (settings?.showDmcaSafeCol) {
+    optionalCols.push({
+      headerName: 'DMCA Safe',
+      field: 'metadata.dmcaSafe',
+      minWidth: 105,
+      maxWidth: 105,
+      resizable: false,
+      cellRendererFramework: CheckRenderer,
+      suppressMenu: true,
+      getQuickFilterText: (): string => '',
+      cellStyle: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    });
+  }
+  const baseCols = [
     {
       headerName: '',
       field: 'mark',
@@ -195,7 +216,8 @@ const getColDef: (
         onGridSongChange: onGridSongChange,
       }),
     },
-  ];
+  ] as ColDef[];
+  return baseCols.concat(optionalCols);
 };
 
 const scrollToLocatedRow = (rowIndex: number | null): void => {
@@ -234,6 +256,7 @@ const MusicGrid: React.FC<{
   const setGridFiltered = useSetAtom(gridFilteredAtom);
   const setAppQueuePool = useSetAtom(appQueuePoolAtom);
   const setIsPlaying = useSetAtom(isPlayingAtom);
+  const { settings } = useSettings();
 
   const onGridSongChange: (song: string) => void = (song) => {
     setIsPlaying(true);
@@ -245,7 +268,7 @@ const MusicGrid: React.FC<{
     });
   };
 
-  colDef.current = getColDef(onGridSongChange, enableTrackIdCol);
+  colDef.current = getColDef(onGridSongChange, enableTrackIdCol, settings);
   gridOptions.current = getGridOptions();
 
   useEffect(() => {
