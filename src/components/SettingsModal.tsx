@@ -24,12 +24,18 @@ export const SettingsModal: React.FC<ISettingsModalProps> = ({
   const [jsonOptimizedTrackIdCopy, setJsonOptimizedTrackIdCopy] = useState(
     settings.jsonOptimizedTrackIdCopy
   );
+  const [hideDmcaUnsafe, setHideDmcaUnsafe] = useState(settings.hideDmcaUnsafe);
+  const [showDmcaSafeCol, setShowDmcaSafeCol] = useState(
+    settings.showDmcaSafeCol
+  );
 
   const onModalSave = () => {
     setSettings({
       hideMinorTracks,
       distinctKmstVersion,
       jsonOptimizedTrackIdCopy,
+      hideDmcaUnsafe,
+      showDmcaSafeCol,
     });
     onModalClose();
   };
@@ -38,6 +44,8 @@ export const SettingsModal: React.FC<ISettingsModalProps> = ({
     setHideMinorTracks(settings.hideMinorTracks);
     setDistinctKmstVersion(settings.distinctKmstVersion);
     setJsonOptimizedTrackIdCopy(settings.jsonOptimizedTrackIdCopy);
+    setHideDmcaUnsafe(settings.hideDmcaUnsafe);
+    setShowDmcaSafeCol(settings.showDmcaSafeCol);
   };
 
   return (
@@ -79,6 +87,37 @@ export const SettingsModal: React.FC<ISettingsModalProps> = ({
                 tooltip="Wrap single track ID copies in JSON compatible syntax"
                 onChange={() => {
                   setJsonOptimizedTrackIdCopy((prev) => !prev);
+                }}
+              />
+              <span
+                css={css`
+                  padding-top: 5px;
+                `}
+              ></span>
+
+              <span
+                css={css`
+                  padding-bottom: 5px;
+                `}
+              >
+                ⭐ For content creators:
+              </span>
+              <SettingsModalToggle
+                id="setHideDmcaUnsafe"
+                label="Show DMCA Safe tracks only"
+                checked={hideDmcaUnsafe}
+                tooltip="Songs that should be safe for content creators (this is not 100% guaranteed to be safe)"
+                onChange={() => {
+                  setHideDmcaUnsafe((prev) => !prev);
+                }}
+              />
+              <SettingsModalToggle
+                id="setShowDmcaSafeCol"
+                label="Show DMCA Safe Column"
+                checked={showDmcaSafeCol}
+                tooltip="Show the DMCA Safe column"
+                onChange={() => {
+                  setShowDmcaSafeCol((prev) => !prev);
                 }}
               />
             </div>
