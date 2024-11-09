@@ -18,14 +18,14 @@ const AboutPage: React.FC = () => (
         series. It has been compiled and is being updated by SpiderInTheSim.
       </p>
       <h6>
-        <b>Music Playback</b>
+        <b>🎵 Music Playback</b>
       </h6>
       <p>
         Music is played within an embedded YouTube player. The track is looped
         upon completion, unless in the shuffled queue mode (see below).
       </p>
       <h6>
-        <b>Shuffled Queue</b>
+        <b>🔀 Shuffled Queue</b>
       </h6>
       <p>
         The shuffled queue feature randomizes the entire music collection and
@@ -35,7 +35,7 @@ const AboutPage: React.FC = () => (
         filtered entries.
       </p>
       <h6>
-        <b>Grid Controls</b>
+        <b>🎮 Grid Controls</b>
       </h6>
       <p>
         To sort by a column, press the column header. Hover over a column header
@@ -44,7 +44,18 @@ const AboutPage: React.FC = () => (
         header.
       </p>
       <h6>
-        <b>Acknowledgments</b>
+        <b>⭐ Content Creator Settings</b>
+      </h6>
+      <p>
+        There are two options in the settings menu which are options to show
+        DMCA Safe tracks only and show the optional DMCA Safe column in the
+        music grid. These are not 100% guaranteed safe. This is just what I
+        found through my own content getting flagged and through research. I may
+        have made mistakes and music licenses could potentially change over
+        time.
+      </p>
+      <h6>
+        <b>🙏 Acknowledgments</b>
       </h6>
       <p>
         We thank the creators of the{' '}
