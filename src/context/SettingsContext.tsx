@@ -2,10 +2,12 @@ import React, { ReactElement, ReactNode } from 'react';
 
 const LOCAL_STORAGE_KEY = 'site-preferences';
 
-interface ISettings {
+export interface ISettings {
   hideMinorTracks: boolean;
   distinctKmstVersion: boolean;
   jsonOptimizedTrackIdCopy: boolean;
+  hideDmcaUnsafe: boolean;
+  showDmcaSafeCol: boolean;
 }
 
 type SettingsContextOutput = {
@@ -21,6 +23,8 @@ const defaultSettings: ISettings = {
   hideMinorTracks: false,
   distinctKmstVersion: false,
   jsonOptimizedTrackIdCopy: false,
+  hideDmcaUnsafe: false,
+  showDmcaSafeCol: false,
 };
 
 function getDefaultSettings(): ISettings {
