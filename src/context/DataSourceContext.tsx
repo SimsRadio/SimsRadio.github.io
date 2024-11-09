@@ -33,8 +33,8 @@ export const DataSourceProvider: ({
       .then((rowData: IMusicRecordJson[]) => {
         const rowDataGrid: IMusicRecordGrid[] = rowData
           .filter((song) => {
-            return settings.hideMinorTracks
-              ? !song.decoration?.minorTrack ?? true
+            return settings.hideDmcaUnsafe
+              ? song.metadata.dmcaSafe === 'Y'
               : true;
           })
           .map((song: IMusicRecordJson) => {
@@ -64,6 +64,7 @@ export const DataSourceProvider: ({
     setState,
     settings.hideMinorTracks,
     settings.distinctKmstVersion,
+    settings.hideDmcaUnsafe,
     setPlaylistMap,
   ]);
 
