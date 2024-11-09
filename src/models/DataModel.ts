@@ -6,6 +6,7 @@ interface IMusicRecordMetadataJson {
   subtitle: string;
   title: string;
   year: string;
+  dmcaSafe: string;
 }
 
 interface IMusicRecordSourceJson {
@@ -21,6 +22,7 @@ interface IMusicRecordLocaleJson {
   metadata?: {
     artist?: string;
     title?: string;
+    dmcaSafe?: string;
   };
   songType: string;
   pack: string;
