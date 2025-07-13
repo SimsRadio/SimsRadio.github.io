@@ -4,34 +4,28 @@ import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { ICellRendererParams } from 'ag-grid-community';
 import { pauseVideoEvent } from '../../events/events';
+import { IPopupData } from '../../models/DataModel';
 
 export interface ILinkRendererParams {
   title: string;
   youtube: string;
-  onGridSongChange: (song: string) => void;
+  popupData: IPopupData;
+  onGridSongChange: (song: string, popupData: IPopupData) => void;
 }
 type ILinkRenderer = ILinkRendererParams & ICellRendererParams;
 
 export const LinkRenderer: React.FC<ILinkRenderer> = (params) => {
-  const { youtube, title } = params;
+  const { youtube, title, popupData } = params;
   const hasLink = youtube !== '';
 
   const onEmbeddedClick: (e: React.MouseEvent<HTMLAnchorElement>) => void = (
     e
   ) => {
-    gtag('event', 'ce_view_embedded_video', {
-      ce_category: 'video',
-      ce_youtube: params.youtube,
-    });
-    params.onGridSongChange(params.youtube);
+    params.onGridSongChange(params.youtube, popupData);
     e.preventDefault();
   };
   const onExternalClick: () => void = () => {
     window.dispatchEvent(pauseVideoEvent);
-    gtag('event', 'ce_view_external_video', {
-      ce_category: 'video',
-      ce_youtube: params.youtube,
-    });
   };
 
   return hasLink ? (

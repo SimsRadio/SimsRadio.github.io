@@ -20,7 +20,6 @@ import {
   queueRepeatAtom,
 } from '../state/player';
 import { shuffle } from 'lodash-es';
-import { selectedPlaylistAtom } from '../state/playlist';
 import { IPlayingState } from '../models/Player';
 
 const SearchBar: React.FC = () => {
@@ -30,7 +29,6 @@ const SearchBar: React.FC = () => {
   const [playingState, setPlayingState] = useAtom(playingStateAtom);
   const appQueuePool = useAtomValue(appQueuePoolAtom);
   const gridFiltered = useAtomValue(gridFilteredAtom);
-  const selectedPlaylist = useAtomValue(selectedPlaylistAtom);
   const setIsPlaying = useSetAtom(isPlayingAtom);
 
   const onFilterTextChanged: (
@@ -58,12 +56,14 @@ const SearchBar: React.FC = () => {
       currentQueue: queueSongs,
       currentQueueSong: 0,
       repeatQueue: queueRepeat,
-    });
-    gtag('event', 'ce_start_queue', {
-      ce_category: 'queue',
-      ce_source: 'play_button',
-      ce_filtered: gridFiltered,
-      ce_playlist_name: selectedPlaylist,
+      popupData: {
+        trackName: queueSongs[0].metadata.title,
+        artist:
+          queueSongs[0].metadata.artist && queueSongs[0].metadata.artist !== ''
+            ? queueSongs[0].metadata.artist
+            : queueSongs[0].source.client,
+        albumCover: queueSongs[0].metadata.albumCover,
+      },
     });
   };
 
@@ -78,12 +78,15 @@ const SearchBar: React.FC = () => {
       currentQueue: shuffledSongs,
       currentQueueSong: 0,
       repeatQueue: queueRepeat,
-    });
-    gtag('event', 'ce_start_shuffled_queue', {
-      ce_category: 'queue',
-      ce_source: 'shuffle_button',
-      ce_filtered: gridFiltered,
-      ce_playlist_name: selectedPlaylist,
+      popupData: {
+        trackName: shuffledSongs[0].metadata.title,
+        artist:
+          shuffledSongs[0].metadata.artist &&
+          shuffledSongs[0].metadata.artist !== ''
+            ? shuffledSongs[0].metadata.artist
+            : shuffledSongs[0].source.client,
+        albumCover: shuffledSongs[0].metadata.albumCover,
+      },
     });
   };
 

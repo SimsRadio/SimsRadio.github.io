@@ -28,6 +28,15 @@ const HomePage: React.FC = () => {
         ...state,
         currentSong: state.currentQueue[newVal].youtube,
         currentQueueSong: newVal,
+        popupData: {
+          trackName: state.currentQueue[newVal].metadata.title,
+          artist:
+            state.currentQueue[newVal].metadata.artist &&
+            state.currentQueue[newVal].metadata.artist !== ''
+              ? state.currentQueue[newVal].metadata.artist
+              : state.currentQueue[newVal].source.client,
+          albumCover: state.currentQueue[newVal].metadata.albumCover,
+        },
       };
     });
   };

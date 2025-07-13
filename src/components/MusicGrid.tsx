@@ -21,7 +21,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham-dark.css';
 import { format } from 'date-fns';
-import { IMusicRecordGrid } from '../models/DataModel';
+import { IMusicRecordGrid, IPopupData } from '../models/DataModel';
 import { PAGINATION_PAGE_SIZE } from '../constants';
 import { MarkRenderer } from './renderers/MarkRenderer';
 import { CheckRenderer } from './renderers/CheckRenderer';
@@ -77,7 +77,7 @@ const getGridOptions: () => GridOptions = () => {
 };
 
 const getColDef: (
-  onGridSongChange: (song: string) => void,
+  onGridSongChange: (song: string, popupData: IPopupData) => void,
   enableTrackIdCol?: boolean,
   settings?: ISettings
 ) => ColDef[] = (onGridSongChange, enableTrackIdCol, settings) => {
@@ -135,6 +135,14 @@ const getColDef: (
       ): ILinkRendererParams => ({
         title: props.value,
         youtube: props.data.youtube,
+        popupData: {
+          trackName: props.data.metadata.title,
+          artist:
+            props.data.metadata.artist && props.data.metadata.artist !== ''
+              ? props.data.metadata.artist
+              : props.data.source.client,
+          albumCover: props.data.metadata.albumCover,
+        },
         onGridSongChange: onGridSongChange,
       }),
     },
@@ -213,6 +221,14 @@ const getColDef: (
       ): ILinkRendererParams => ({
         title: props.value,
         youtube: props.data.originalSong,
+        popupData: {
+          trackName: props.data.metadata.title,
+          artist:
+            props.data.metadata.artist && props.data.metadata.artist !== ''
+              ? props.data.metadata.artist
+              : props.data.source.client,
+          albumCover: props.data.metadata.albumCover,
+        },
         onGridSongChange: onGridSongChange,
       }),
     },
@@ -258,16 +274,19 @@ const MusicGrid: React.FC<{
   const setIsPlaying = useSetAtom(isPlayingAtom);
   const { settings } = useSettings();
 
-  const onGridSongChange: (song: string) => void = (song) => {
+  const onGridSongChange: (song: string, popupData: IPopupData) => void = (
+    song,
+    popupData
+  ) => {
     setIsPlaying(true);
     setPlayingState({
       currentSong: song,
       currentQueue: [],
       currentQueueSong: -1,
       repeatQueue: queueRepeat,
+      popupData: popupData,
     });
   };
-
   colDef.current = getColDef(onGridSongChange, enableTrackIdCol, settings);
   gridOptions.current = getGridOptions();
 

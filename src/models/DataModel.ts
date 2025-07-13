@@ -1,7 +1,8 @@
 import { LanguageLocale } from '../i18n';
 
 interface IMusicRecordMetadataJson {
-  albumArtist: string;
+  albumName: string;
+  albumCover: string;
   artist: string;
   subtitle: string;
   title: string;
@@ -58,4 +59,15 @@ export interface IMusicRecordSourceGrid
 
 export interface IMusicRecordGrid extends Omit<IMusicRecordJson, 'source'> {
   source: IMusicRecordSourceGrid;
+}
+
+export interface IPopupData {
+  trackName: string;
+  artist: string;
+  albumCover: string;
+}
+
+export interface IPlaytimeDuration {
+  playtime: number;
+  duration: number;
 }

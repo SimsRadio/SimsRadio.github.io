@@ -1,14 +1,17 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import ReactDOM from 'react-dom';
+import { useState, useEffect } from 'react';
 import React, { useRef } from 'react';
 import ReactPlayer from 'react-player';
 import { padStart } from 'lodash-es';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import { IPlayingState } from '../models/Player';
-import { selectedPlaylistAtom } from '../state/playlist';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 import { useEvent } from 'react-use';
-import { isPlayingAtom } from '../state/player';
+import { emptyPlaytimeDuration, isPlayingAtom } from '../state/player';
+
+import PopupPlayer from './PopupPlayer';
 
 interface IMusicPlayerProps {
   playingState: IPlayingState;
@@ -18,8 +21,59 @@ interface IMusicPlayerProps {
 export const MusicPlayer: React.FC<IMusicPlayerProps> = (props) => {
   const player = useRef<ReactPlayer>(null);
   const { playingState, setCurrentQueueSong } = props;
-  const selectedPlaylist = useAtomValue(selectedPlaylistAtom);
   const [isPlaying, setIsPlaying] = useAtom(isPlayingAtom);
+  const [playtimeDuration, setPlaytimeDuration] = useState(
+    emptyPlaytimeDuration
+  );
+  const [popupWindow, setPopupWindow] = useState<Window | null>(null);
+  const [popupContainer, setPopupContainer] = useState<HTMLDivElement | null>(
+    null
+  );
+  const [duration, setDuration] = useState<number>(1);
+
+  const togglePopup = () => {
+    if (popupWindow && !popupWindow.closed) {
+      popupWindow.close();
+      setPopupWindow(null);
+      setPopupContainer(null);
+    } else {
+      const newWindow = window.open('', '', 'width=600,height=300');
+      if (!newWindow) return;
+
+      const container = newWindow.document.createElement('div');
+      newWindow.document.body.style.backgroundColor = '#FF00FF';
+
+      newWindow.document.body.appendChild(container);
+      newWindow.document.title = 'SimsRadio - Now Playing';
+
+      setPopupWindow(newWindow);
+      setPopupContainer(container);
+    }
+  };
+
+  // handle closing popup when switching to a different page wihtin the app
+  useEffect(() => {
+    return () => {
+      if (popupWindow && !popupWindow.closed) {
+        popupWindow.close();
+      }
+    };
+  }, [popupWindow]);
+
+  // handle closing popup when the parent window is closed/off the app
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (popupWindow && !popupWindow.closed) {
+        popupWindow.close();
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [popupWindow]);
 
   useEvent('pausevideo', () => {
     setIsPlaying(false);
@@ -36,9 +90,30 @@ export const MusicPlayer: React.FC<IMusicPlayerProps> = (props) => {
     setCurrentQueueSong(playingState.currentQueueSong + 1);
   };
 
+  // Cleanup when window is closed
+  useEffect(() => {
+    if (!popupWindow) return;
+
+    const timer = setInterval(() => {
+      if (popupWindow.closed) {
+        setPopupWindow(null);
+        setPopupContainer(null);
+      }
+    }, 500);
+
+    return () => clearInterval(timer);
+  }, [popupWindow]);
+
   return (
     <div>
       <ReactPlayer
+        onDuration={setDuration}
+        onProgress={(state) => {
+          setPlaytimeDuration({
+            playtime: Math.ceil(state.playedSeconds),
+            duration: duration,
+          });
+        }}
         css={css`
           display: block;
           margin-left: auto;
@@ -55,16 +130,7 @@ export const MusicPlayer: React.FC<IMusicPlayerProps> = (props) => {
           if (player.current !== null) {
             if (!playingState.currentQueue.length) {
               player.current.seekTo(0);
-              gtag('event', 'ce_loop_embedded_video', {
-                ce_category: 'video',
-                ce_youtube: playingState.currentSong,
-              });
             } else {
-              gtag('event', 'ce_complete_queue_video', {
-                ce_category: 'video',
-                ce_youtube: playingState.currentSong,
-                ce_playlist_name: selectedPlaylist,
-              });
               let newVal;
               if (
                 playingState.currentQueueSong ===
@@ -127,6 +193,37 @@ export const MusicPlayer: React.FC<IMusicPlayerProps> = (props) => {
           </ButtonGroup>
         </div>
       )}
+      <Button
+        variant={popupWindow && !popupWindow.closed ? 'danger' : 'info'}
+        size="sm"
+        onClick={togglePopup}
+        css={css`
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 10px;
+        `}
+      >
+        {popupWindow && !popupWindow.closed
+          ? 'Close pop-out'
+          : 'Pop out current song'}
+      </Button>
+
+      {popupContainer &&
+        ReactDOM.createPortal(
+          <PopupPlayer
+            songName={playingState.popupData?.trackName ?? 'song name'}
+            artist={playingState.popupData?.artist ?? 'album name'}
+            albumCover={
+              playingState.popupData?.albumCover
+                ? `${window.location.origin}/album/${playingState.popupData?.albumCover}`
+                : `${window.location.origin}/mark/default.png`
+            }
+            playtimeDuration={playtimeDuration}
+            container={popupWindow?.document.head ?? null}
+          />,
+          popupContainer
+        )}
     </div>
   );
 };
